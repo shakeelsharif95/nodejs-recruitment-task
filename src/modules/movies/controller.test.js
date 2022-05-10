@@ -2,6 +2,7 @@ const request = require("supertest");
 const app = require("../../server");
 const { verifyToken, extractToken } = require("../../services/auth-service");
 const ASYNC_TIMEOUT = 20000;
+const db = require('../../db/db-test')
 
 const login = () =>
   request(app).post("/auth").send({
@@ -10,7 +11,6 @@ const login = () =>
   });
 
 describe("Movie Endpoints", () => {
-  const db = require('./db')
   beforeAll(async () => await db.connect())
   afterEach(async () => await db.clearDatabase())
   afterAll(async () => await db.closeDatabase())
@@ -45,7 +45,7 @@ describe("Movie Endpoints", () => {
         });
       expect(res.statusCode).toEqual(201);
       console.log("body", res.body);
-      expect(res.text).toEqual("Succesfully created");
+      expect(res.text).toEqual("Successfully created");
     },
     ASYNC_TIMEOUT
   );

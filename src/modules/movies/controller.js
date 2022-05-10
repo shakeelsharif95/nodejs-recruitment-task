@@ -64,7 +64,7 @@ exports.createMovie = async function (req, res, next) {
 
     await movie.save();
 
-    res.status(201).send("Succesfully created");
+    res.status(201).send("Successfully created");
   } catch (error) {
     console.log("Error", error);
     res.status(500).send("An error occured!");

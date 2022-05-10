@@ -4,9 +4,6 @@ const bodyParser = require("body-parser");
 const authRouter = require("./modules/auth/routes");
 const moviesRouter = require("./modules/movies/routes");
 const db = require("./db/db");
-if (process.env.NODE_ENV != 'test') {
-  db.connect();
-}
 
 const PORT = 3000;
 
@@ -26,8 +23,11 @@ app.use((error, _, res, __) => {
   return res.status(500).json({ error: "internal server error" });
 });
 
-app.listen(PORT, () => {
-  console.log(`auth svc running at port ${PORT}`);
-});
+if (process.env.NODE_ENV != 'test') {
+  db.connect();
+  app.listen(PORT, () => {
+    console.log(`auth svc running at port ${PORT}`);
+  });
+}
 
 module.exports = app;

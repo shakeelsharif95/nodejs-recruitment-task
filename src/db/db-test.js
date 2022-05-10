@@ -1,19 +1,16 @@
 const mongoose = require("mongoose");
-const { MongoMemoryServer } = require("mongo-memory-server");
+const { MongoMemoryServer } = require("mongodb-memory-server");
+let mongod;
 
-const mongod = new MongoMemoryServer();
-
-
-module.exports.connects = async ()=>{
-  const uri = await mongod.getUri();
+module.exports.connect = async ()=>{
+  mongod = await MongoMemoryServer.create();
+  const uri = mongod.getUri();
   const mongooseOpts = {
     useNewUrlParser :true,
     useUnifiedTopology:true,
-    poolSize:30,
   }
 
   await mongoose.connect(uri,mongooseOpts);
-
 }
 
 module.exports.closeDatabase = async ()=>{
