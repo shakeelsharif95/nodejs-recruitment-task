@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "jest": {
     "testEnvironment": "node",
@@ -22,6 +22,7 @@
     "jest": "^28.1.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.3",
+    "mongodb-memory-server": "^8.5.2",
     "mongoose": "^6.3.3",
     "supertest": "^6.2.3"
   }

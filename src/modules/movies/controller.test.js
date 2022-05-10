@@ -10,6 +10,11 @@ const login = () =>
   });
 
 describe("Movie Endpoints", () => {
+  const db = require('./db')
+  beforeAll(async () => await db.connect())
+  afterEach(async () => await db.clearDatabase())
+  afterAll(async () => await db.closeDatabase())
+
   it("should check invalid username and password", async () => {
     const res = await request(app).post("/auth").send({
       username: "basic-thomass",
